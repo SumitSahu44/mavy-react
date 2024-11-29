@@ -105,12 +105,18 @@ close.addEventListener("click",function(){
         </div>
     
        <div className="item-cont">
+        
                 {products.map(product => (
+
+
                     <div className="item"  key={product.id}>
-                        <div className="product-img" id="p-img1"></div>
+                        <div>
+                            <img src={`img/${product.imageUrl}`} />
+                        </div>
                         <div className="product-info">
                             <h3>{product.name}</h3>
                             <p><b>Description</b>- {product.description}</p>
+                            <p><b>Size</b>- {product.size.join(", ")}</p>
                             <p><b>Price</b>- {product.price}$</p>
                             <a href={`./buy?pid=${product._id}`}><button>Buy Now</button></a>
                         </div>

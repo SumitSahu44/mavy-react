@@ -89,7 +89,8 @@ import { IoMdClose } from "react-icons/io";
                         const productDetails = await productResponse.json();
                         return {
                             productDetails,
-                            quantity: item.quantity
+                            quantity: item.quantity,
+                            size: item.size
                         };
                     })
                 );
@@ -147,6 +148,7 @@ import { IoMdClose } from "react-icons/io";
             updatedProductsDetails.forEach(element => {
                 total += element.quantity * element.productDetails.price;
             });
+
 
             console.log(`updatedProductsDetails ${updatedProductsDetails}`)
             setTotalBill(total);
@@ -233,6 +235,7 @@ import { IoMdClose } from "react-icons/io";
                                             <h3>{item.productDetails.name}</h3>
                                             <p>{item.productDetails.description}</p>
                                             <p>${item.productDetails.price}</p>
+                                            <p>Size: {item.size}</p>
                                             <form action="#">
                                                 <label>Qty:</label>
                                                 <input type="number" min="1" value={item.quantity}
@@ -255,7 +258,7 @@ import { IoMdClose } from "react-icons/io";
                             <div className="c-r-info">
                                 <div>
                                     <p>Cost Subtotal</p>
-                                    <p>Shipping Cost</p>
+                                    {/* <p>Shipping Cost</p> */}
                                     <p>Discount</p>
                                     <h4>Total Cost</h4>
                                 </div>
@@ -263,9 +266,9 @@ import { IoMdClose } from "react-icons/io";
                             <div className="c-l-info">
                                 <div>
                                     <p>${totalBill}</p>
-                                    <p>$9</p>
+                                    {/* <p>$9</p> */}
                                     <p>N/A</p>
-                                    <h4>${totalBill + 9}</h4>
+                                    <h4>${totalBill}</h4>
                                 </div>
                             </div>
                         </div>

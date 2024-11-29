@@ -107,7 +107,8 @@ function Product(){
                             <div className="product-info">
                                 <h3>{product.name}</h3>
                                 <p>{product.description}</p>
-                                <p>${product.price}</p>
+                                <p>Size: {product.size.join(', ')}</p>
+                                <p>Price: ${product.price}</p>
                                 <a href={`buy?pid=${product._id}`}><button>Buy Now</button></a>
                             </div>
                         </div>

@@ -14,6 +14,8 @@ const Buy=()=>{
   const [quantity, setQuantity] = useState(1);           // Default quantity is 1    
   const [userId, setUserId] = useState(null); // Set this to your logged-in user ID
   const [productId, setProductId] = useState(`${pid}`);
+  const [selectedSize, setSelectedSize] = useState(""); // To store selected size
+
   useEffect(() => {
     
    
@@ -89,6 +91,12 @@ const Buy=()=>{
  const handleAddToCartClick = async () => {
   try {
 
+     if(!selectedSize)
+     {
+       toast.error("Select Size");
+       return
+     }
+
 
 
     const authToken = localStorage.getItem('authToken');
@@ -112,6 +120,7 @@ const Buy=()=>{
       body: JSON.stringify({
         productId,
         quantity,
+        size: selectedSize,
       }),
       credentials: 'include', // This ensures cookies are sent along with the request
     });
@@ -191,9 +200,10 @@ const Buy=()=>{
               {/* <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p> */}
               <ul>
                 <li>Available: <span>in stock</span></li>
-                <li>Category: <span>Cloth</span></li>
+                <li>Category: <span>{data.category}</span></li>
                 <li>Shipping Area: <span>All over the world</span></li>
-                <li>Shipping Fee: <span>$9.99</span></li>
+                <li>Sizes: {data.size && data.size.join(", ")}</li>
+                {/* <li>Shipping Fee: <span>$9.99</span></li> */}
               </ul>
             </div>
       
@@ -222,6 +232,20 @@ const Buy=()=>{
                 onChange={(e) => setQuantity(e.target.value)} 
               />
 
+          <select required name='size'  
+                 onChange={(e) => setSelectedSize(e.target.value)}
+                 value={selectedSize}>
+            <option value="">--Select Size--</option>
+            {Array.isArray(data.size) && data.size.length > 0 ? (
+              data.size.map((size, index) => (
+                <option key={index} value={size}>
+                  {size}
+                </option>
+              ))
+            ) : (
+              <option disabled>No sizes available</option>
+            )}
+          </select>
 
              <button type = "button" onClick={handleAddToCartClick} class = "btn">
               Add to Cart <i class = "fas fa-shopping-cart"></i>
