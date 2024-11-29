@@ -18,7 +18,7 @@ const PaymentSuccess = () => {
 
                 // if (result.paymentStatus === 'paid') {
                 // Clear the cart
-                const deleteResponse = await fetch('http://localhost:4000/user/cartClear', {
+                const deleteResponse = await fetch('https://mavy-pxtx.onrender.com/user/cartClear', {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
