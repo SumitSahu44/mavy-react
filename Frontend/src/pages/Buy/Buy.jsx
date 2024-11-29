@@ -43,21 +43,25 @@ const Buy=()=>{
    
     const fetchData = async () => {
    
-   try {
-    const response1 = await fetch(`https://mavy-pxtx.onrender.com/user/userId`, {
-        method: 'GET',
-        credentials: 'include', // Ensures cookies are sent with the request
-    });
+     
+
+
+  //  try {
+  //   const response1 = await fetch(`https://mavy-pxtx.onrender.com/user/userId`, {
+  //       method: 'GET',
+  //       credentials: 'include', // Ensures cookies are sent with the request
+  //   });
     
-    if (!response1.ok) {
-        throw new Error('Error fetching user data');
-    }
+  //   if (!response1.ok) {
+  //       throw new Error('Error fetching user data');
+  //   }
     
-        const data1 = await response1.json();
-        setUserId(data1.userId)
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
+  //       const data1 = await response1.json();
+  //       console.log(`dATA ${data1}`)
+  //       setUserId(data1.userId)
+  //   } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //   }
 
 
 
@@ -85,23 +89,27 @@ const Buy=()=>{
  const handleAddToCartClick = async () => {
   try {
 
-    if (!userId) {
-      
-      toast.error("User Not registered!");
+
+
+    const authToken = localStorage.getItem('authToken');
+    if(!authToken)
+    {
+      toast.error("User Not registered token!");
       setTimeout(() => {
          window.location.href='/signup'
       }, 6000);
       
       return;
     }
+
     // Make an API call to the addToCart endpoint
     const response = await fetch('https://mavy-pxtx.onrender.com/user/addtocart', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`, // Attach token in Authorization header
       },
       body: JSON.stringify({
-        userId,
         productId,
         quantity,
       }),

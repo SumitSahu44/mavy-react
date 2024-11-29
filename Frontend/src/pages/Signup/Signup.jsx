@@ -36,6 +36,7 @@ const SignupPage=()=>{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    
                 },
                 body: JSON.stringify(formData),
                 credentials: 'include' // Include cookies0 
@@ -45,8 +46,11 @@ const SignupPage=()=>{
                console.log("data"+ JSON.stringify(data))
             if (response.ok) {
                 
-                toast.success("User registered successfully!");
-                setTimeout(() => {
+                if (data.token) {
+                    localStorage.setItem('authToken', data.token);
+                    toast.success("User registered successfully!");
+                }
+               setTimeout(() => {
                     window.location.href = pid ? `./buy?pid=${pid}` : '/';
                 }, 4000);
                 

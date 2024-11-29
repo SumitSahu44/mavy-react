@@ -22,7 +22,8 @@ const PaymentSuccess = () => {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
-                    },
+                       'Authorization': `Bearer ${authToken}`, // Attach token in the Authorization header
+                      },  
                     credentials: 'include',
                 });
 

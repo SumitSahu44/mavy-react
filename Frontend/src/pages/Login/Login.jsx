@@ -29,16 +29,24 @@ export default function login(){
             });
 
             const data = await response.json();
-               console.log("data"+ JSON.stringify(data))
+           
             if (response.ok) {
-                toast.success("User Login successfully!");
+                // Store the token in localStorage
+                if (data.token) {
+                    localStorage.setItem('authToken', data.token);
+                    toast.success("User logged in successfully!");
+                } else {
+                    toast.error("No token received!");
+                    return;
+                }
+    
                 setTimeout(() => {
-                    window.location.href='/';
-                }, 4000);
-
+                    window.location.href = '/';
+                }, 2000);
             } else {
-                toast.error(data.message  || "User Not Found!!");
+                toast.error(data.message || "User Not Found!");
             }
+    
         } catch (error) {
             console.error('Error:', error);
           }

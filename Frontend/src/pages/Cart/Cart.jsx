@@ -16,7 +16,7 @@ import { IoMdClose } from "react-icons/io";
     const [productsDetails, setProductsDetails] = useState([]); // Contains fetched product details
     const [isLoading, setIsLoading] = useState(true); // Add loading state
     const [totalBill, setTotalBill] = useState(null);
-
+    const authToken = localStorage.getItem('authToken'); // Retrieve token from localStorage
     useGSAP(() => {
         let menu = document.querySelector("#nav i");
         let close = document.querySelector("#full i");
@@ -55,21 +55,15 @@ import { IoMdClose } from "react-icons/io";
         const fetchData = async () => {
             try {
                 // Fetch userId
-                const response1 = await fetch(`https://mavy-pxtx.onrender.com/user/userId`, {
-                    method: 'GET',
-                    credentials: 'include', // Ensures cookies are sent with the request
-                });
-                
-                if (!response1.ok) {
-                    throw new Error('Error fetching user data');
-                }
-                
-                const data1 = await response1.json();
-                setUserId(data1.userId);
+
+              
 
                 // Fetch cart items
                 const response2 = await fetch(`https://mavy-pxtx.onrender.com/user/cart`, {
                     method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`, // Attach token in the Authorization header
+                    },
                     credentials: 'include', // Ensures cookies are sent with the request
                 });
                 
@@ -129,11 +123,13 @@ import { IoMdClose } from "react-icons/io";
 
     const removeCartItem = async (itemId) => {
         try {
+          
             const response = await fetch(`https://mavy-pxtx.onrender.com/user/cartItemDelete?pid=${itemId}`, {
               method: 'DELETE',
               headers: {
                 'Content-Type': 'application/json',
-              },
+               'Authorization': `Bearer ${authToken}`, // Attach token in the Authorization header
+              },             
               credentials: 'include', // Include cookies
             });
           
@@ -171,7 +167,8 @@ import { IoMdClose } from "react-icons/io";
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                },
+                   'Authorization': `Bearer ${authToken}`, // Attach token in the Authorization header
+                  },  
                 credentials: 'include', // Include cookies
                 body: JSON.stringify({
                     userId,
