@@ -5,7 +5,7 @@ import './Success.css';
 const PaymentSuccess = () => {
 
     const [waitingTime, setwaitingTime] = useState(8)
-
+    const authToken = localStorage.getItem('authToken'); // Retrieve token from localStorage
 
     useEffect(() => {
         const checkPaymentStatus = async () => {

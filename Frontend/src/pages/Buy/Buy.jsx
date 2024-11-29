@@ -94,9 +94,9 @@ const Buy=()=>{
     const authToken = localStorage.getItem('authToken');
     if(!authToken)
     {
-      toast.error("User Not registered token!");
+      toast.error("User Not registered!");
       setTimeout(() => {
-         window.location.href='/signup'
+         window.location.href=`/signup?pid=${pid}`;
       }, 6000);
       
       return;
