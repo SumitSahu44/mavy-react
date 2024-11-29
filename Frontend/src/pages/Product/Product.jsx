@@ -98,7 +98,7 @@ function Product(){
                         <div className="item" key={index}>
                             <div className="product-img">
                                 <img className='img'
-                                    src={product.imageUrl ? `../public/img/${product.imageUrl}` : "img/fallback.jpeg"} 
+                                    src={product.imageUrl ? `./img/${product.imageUrl}` : "img/fallback.jpeg"} 
                                     alt={product.name || 'Product image'} 
                                 />
                             </div>
