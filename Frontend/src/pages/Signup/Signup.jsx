@@ -70,6 +70,7 @@ const SignupPage=()=>{
                 <div className="signup-header">
                     <header>Sign Up</header>
                 </div>
+{/*                 sigunp code  */}
 
                 <form onSubmit={handleSubmit}>
                     <div className="input-box">
