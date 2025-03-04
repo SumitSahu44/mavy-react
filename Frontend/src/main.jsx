@@ -10,6 +10,7 @@ import Buy from './pages/Buy/Buy.jsx'
 import Signup from './pages/Signup/Signup.jsx'
 import Login from './pages/Login/Login.jsx'
 import Success from './pages/Success/Success.jsx'
+// all paths 
 const router=createBrowserRouter([
   {
     path:'/',
