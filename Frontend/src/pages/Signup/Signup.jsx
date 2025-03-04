@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css"; // Import Toastify CSS
 import { useSearchParams } from "react-router-dom";
 
 import "./signup.css"
-
+// registration component 
 const SignupPage=()=>{
     const [searchParams] = useSearchParams();
     const pid = searchParams.get("pid"); // Replace "paramName" with the actual parameter key
